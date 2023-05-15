@@ -3,16 +3,16 @@
   "description": "ChatGPT를 이용한 번역기 by kyusung",
   "version": "1.0",
   "manifest_version": 3,
-  "permissions": ["activeTab", "scripting"],
+  "permissions": ["activeTab", "scripting", "storage"],
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup/popup.html"
   },
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background/background.js"
   },
   "content_scripts": [
     {
-      "js": ["content.js"],
+      "js": ["contents/content.js"],
       "matches": ["https://*/*"]
     }
   ]
