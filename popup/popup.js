@@ -1,15 +1,24 @@
-let OPENAI_API_KEY = "";
 chrome.storage.sync.get(["OPENAI_API_KEY"], (result) => {
-  if (result.OPENAI_API_KEY) {
-    OPENAI_API_KEY = result.OPENAI_API_KEY;
-  } else {
-    OPENAI_API_KEY = prompt("OPENAI_API_KEY를 입력해주세요.");
+  if (!result.OPENAI_API_KEY) {
+    const OPENAI_API_KEY = prompt("OPENAI_API_KEY를 입력해주세요.");
     chrome.storage.sync.set({ OPENAI_API_KEY });
   }
 });
+const tokenRefresh = document.querySelector(".token-refresh");
+tokenRefresh.addEventListener("click", () => {
+  const OPENAI_API_KEY = prompt("OPENAI_API_KEY를 입력해주세요.");
+  chrome.storage.sync.set({ OPENAI_API_KEY });
+  // TODO synchronouse 써보기
+  // https://developer.chrome.com/docs/extensions/reference/storage/
+  chrome.runtime.sendMessage({
+    text: OPENAI_API_KEY,
+    kyusung: "token",
+  });
+});
 
+const selected = document.querySelector(".container .content .selected");
+const button = document.querySelector(".button .translate");
 const input = document.querySelector(".container .content .input");
-const button = document.querySelector(".button #translate");
 const output = document.querySelector(".container .content .output");
 
 function onMessageListen(request, sender, sendResponse) {
@@ -17,7 +26,7 @@ function onMessageListen(request, sender, sendResponse) {
     if (request.kyusung === "kyusung") {
       console.log(request.text);
       sendResponse({});
-      input.innerHTML = request.text;
+      selected.innerHTML = request.text;
     } else if (request.kyusung === "translated") {
       console.log(request.text);
       sendResponse({});
@@ -28,15 +37,27 @@ function onMessageListen(request, sender, sendResponse) {
 
 chrome.runtime.onMessage.addListener(onMessageListen);
 
-chrome.storage.sync.get(["selectedText", "translatedText"], (result) => {
-  if (result.selectedText) {
-    input.innerHTML = result.selectedText;
+chrome.storage.sync.get(
+  ["selectedText", "inputText", "translatedText"],
+  (result) => {
+    if (result.selectedText) {
+      selected.innerHTML = result.selectedText;
+    }
+    if (result.inputText) {
+      input.innerHTML = result.inputText;
+    }
+    if (result.translatedText) {
+      output.innerHTML = result.translatedText;
+    }
   }
-  if (result.translatedText) {
-    output.innerHTML = result.translatedText;
-  }
-});
+);
 
 button.addEventListener("click", () => {
-  chrome.runtime.sendMessage({ text: input.innerHTML, kyusung: "translate" });
+  input.innerHTML = selected.innerHTML;
+  output.innerHTML = "번역중...";
+  chrome.runtime.sendMessage({
+    text: selected.innerHTML,
+    kyusung: "translate",
+  });
+  selected.innerHTML = "";
 });

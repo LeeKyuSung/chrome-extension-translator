@@ -6,16 +6,20 @@
     <link rel="stylesheet" href="./popup.css" />
   </head>
   <body>
+    <div class="header">
+      <h1>Translator using ChatGPT</h1>
+      <button class="token-refresh">토큰 재설정</button>
+    </div>
     <div class="container">
       <div class="content">
-        <div class="input">
-        </div>
+        <div class="selected"></div>
         <div class="button">
-          <button id="translate">Translate</button>
+          <button class="translate">번역하기</button>
         </div>
-        <div class="output">
-        </div>
+        <div class="input"></div>
+        <div class="output"></div>
       </div>
+    </div>
     <script src="./popup.js" type="module"></script>
   </body>
 </html>

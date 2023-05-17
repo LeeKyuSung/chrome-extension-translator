@@ -1,84 +1,33 @@
 body {
   width: 600px;
-  padding: 10px;
-  background-color: #455264;
-  border: 3px solid #41b648;
+  padding: 7px;
 }
 .hidden {
   display: none;
 }
 
-.update-noti {
+.header {
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  margin: 0px 20px 10px 20px;
-  padding: 5px 30px;
-  background-color: tomato;
-  border-radius: 3px;
-}
-.update-noti button {
-  background-color: #2d3539;
-  color: #d7d8d8;
-  border-radius: 20px;
-  border-radius: 4px;
-  padding: 4px 14px;
-}
-.update-noti button:hover {
-  background-color: #2d3539;
-  background-color: #37404d;
-}
-
-.not-selected {
-  color: white;
-  font-size: 20px;
-}
-
-.selected table {
-  border: 1px solid black;
-  border-collapse: collapse;
-  margin-bottom: 5px;
-}
-.selected th,
-td {
-  min-width: 60px;
-  border: 1px solid black;
-  padding: 5px;
-  text-align: left;
-  font-size: 15px;
-}
-.selected th {
-  font-weight: 600;
-  background-color: #2d3539;
-  color: #d7d8d8;
-}
-.selected td {
-  font-weight: 400;
-  background-color: #37404d;
-  color: white;
-}
-.selected td a {
-  font-weight: 400;
-  background-color: #37404d;
-  color: white;
-}
-
-.kyungdori {
-  display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 5px;
 }
-.kyungdori button {
-  margin: 7px 0px;
-  padding: 5px 50px;
-  background-color: #2d3539;
-  color: #d7d8d8;
-  font-size: 25px;
-  border-radius: 4px;
+
+.container .content .selected {
+  font-size: large;
+  margin-bottom: 10px;
 }
-.kyungdori button:hover {
-  background-color: #37404d;
+
+.container .content .button .translate {
+  margin-bottom: 10px;
+  font-size: large;
+}
+
+.container .content .input {
+  font-size: large;
+  margin-bottom: 10px;
+}
+
+.container .content .output {
+  font-size: large;
 }
