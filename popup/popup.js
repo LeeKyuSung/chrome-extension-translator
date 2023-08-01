@@ -16,6 +16,16 @@ tokenRefresh.addEventListener("click", () => {
   });
 });
 
+const tabTranslateButton = document.querySelector(".tab-translate");
+tabTranslateButton.addEventListener("click", () => {
+  chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
+    const tab = tabs[0];
+    chrome.tabs.sendMessage(tab.id, {
+      kyusung: "translate-start",
+    });
+  });
+});
+
 const selected = document.querySelector(".container .content .selected");
 const button = document.querySelector(".button .translate");
 const input = document.querySelector(".container .content .input");
